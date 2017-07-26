@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+
+gem 'activerecord', require: 'active_record'
+gem 'bootstrap'
+gem 'dotenv'
+gem 'json'
+gem 'jwt'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'pg'
+gem 'rake'
+gem 'sinatra'
+gem 'sinatra-activerecord'

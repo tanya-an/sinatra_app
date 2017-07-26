@@ -1,0 +1,7 @@
+development:
+ adapter: postgresql
+ encoding: unicode
+ database: sinatra_app
+ username: tanya #<%= ENV['PG_USER'] %>
+ password: tanya #<%= ENV['PG_PASS'] %>
+ host: localhost
