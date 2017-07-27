@@ -6,7 +6,6 @@ require 'omniauth'
 require 'omniauth-github'
 require 'json'
 require './models/user'
-require './models/model'
 require 'pry'
 require 'jwt'
 require 'rest-client'
@@ -22,7 +21,7 @@ end
 enable :sessions
 
 configure do
-	set :sessions, true
+  set :sessions, true
   set :inline_templates, true
 end
 
@@ -32,69 +31,53 @@ end
 
 def private_session
   return erb :index unless token = session['user']
-	@data = JWT.decode token, '70617373776F7264', true, { :algorithm => 'HS256' }
+  @data = JWT.decode token, '70617373776F7264', true, { :algorithm => 'HS256' }
   erb "<pre>#{@data[0]["data"]}</pre>"
   return  unless data[0]["data"]
 end
 
 get '/' do
-	erb :index
+  erb :index
 end
 
 get '/users' do
-	@users = User.all
-	erb :users
-end
-
-post '/submit' do
-	@model = Model.new(params[:model])
-	if @model.save
-		redirect '/models'
-	else
-		"Sorry, there was an error!"
-	end
+  @users = User.all
+  erb :users
 end
 
 post '/submit_user' do
-	@user = User.new(params[:user])
-	if @user.save
-		redirect '/users'
+  @user = User.new(params[:user])
+  if @user.save
+    redirect '/users'
 	else
-		"Sorry, there was an error!"
+    "Sorry, there was an error!"
 	end
-end
-
-get '/models' do
-	@models = Model.all
-	erb :models
 end
 
 get '/quest' do
-	@levels = Level.all
-	erb :quest
+  @levels = Level.all
+  erb :quest
 end
   
 post '/submit-answer' do
-	@user = User.new(params[:user])
-	if @user.save
-		redirect '/users'
-	else
-		"Sorry, there was an error!"
-	end
+  @user = User.new(params[:user])
+  if @user.save
+    redirect '/users'
+  else
+    "Sorry, there was an error!"
+  end
 end
 
 get '/auth/:provider/callback' do
   private_session
   if request.env['omniauth.auth'][:info][:name] != nil then
-  	@user_name = request.env['omniauth.auth'][:info][:name] 
+    @user_name = request.env['omniauth.auth'][:info][:name] 
   else 
-  	@user_name = request.env['omniauth.auth'][:info][:nickname]
+    @user_name = request.env['omniauth.auth'][:info][:nickname]
   end
 
   @user_id = request.env['omniauth.auth'][:uid]
-
-  erb "
-  <h1 style='text-align:center;'>Hello, #{@user_name}</h1>"
+  erb "<h1 style='text-align:center;'>Hello, #{@user_name}</h1>"
 end
 
 get '/auth/failure' do
