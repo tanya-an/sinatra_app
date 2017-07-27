@@ -49,9 +49,9 @@ post '/submit_user' do
   @user = User.new(params[:user])
   if @user.save
     redirect '/users'
-	else
+  else
     "Sorry, there was an error!"
-	end
+  end
 end
 
 get '/quest' do

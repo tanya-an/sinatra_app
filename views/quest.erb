@@ -1,13 +1,13 @@
 <h3>All Question </h3>
 <ul>
 <% @levels.each do |quest| %>
-	<li>
-		<%= quest.name %>
-	</li>
+  <li>
+    <%= quest.name %>
+  </li>
 <% end %>
 </ul>
 <form action="/submit-answer" method="POST">
-	<input type="text" name="level[question]" value="Enter Question" />
-	<input type="submit" value="Submit" />
+  <input type="text" name="level[question]" value="Enter Question" />
+  <input type="submit" value="Submit" />
 </form>
 <a href="/">Back to Home</a>
