@@ -76,8 +76,8 @@ get '/auth/:provider/callback' do
   else 
     @user_name = request.env['omniauth.auth'][:info][:nickname]
   end
-
   @user_id = request.env['omniauth.auth'][:uid]
+  token = JWT.encode @user_id, hmac_secret, ENV['ALG']  
   erb "<h1 style='text-align:center;'>Hello, #{@user_name}</h1>"
 end
 
