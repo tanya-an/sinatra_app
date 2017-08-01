@@ -4,4 +4,4 @@ development:
  database: sinatra_app
  username: <%= ENV['PG_USER'] %>
  password: <%= ENV['PG_PASS'] %>
- host: localhost
+ host: <%= ENV['PG_ HOST'] %>

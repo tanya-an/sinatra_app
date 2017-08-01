@@ -15,7 +15,7 @@ if ENV['CLIENT_ID'] && ENV['CLIENT_SECRET']
   CLIENT_ID = ENV['CLIENT_ID']
   CLIENT_SECRET = ENV['CLIENT_SECRET']
 else
-  puts 'Sorry, there was no tokens!'
+  puts 'Sorry, there were no tokens!'
 end
 
 enable :sessions
@@ -31,7 +31,8 @@ end
 
 def private_session
   return erb :index unless token = session['user']
-  @data = JWT.decode token, '70617373776F7264', true, { :algorithm => 'HS256' }
+  hmac_secret = ENV['PASS']
+  @data = JWT.decode token, hmac_secret, true, { :algorithm => ENV['ALG'] }
   erb "<pre>#{@data[0]["data"]}</pre>"
   return  unless data[0]["data"]
 end
@@ -50,7 +51,7 @@ post '/submit_user' do
   if @user.save
     redirect '/users'
   else
-    "Sorry, there was an error!"
+    "Sorry, there were an error!"
   end
 end
 
@@ -64,7 +65,7 @@ post '/submit-answer' do
   if @user.save
     redirect '/users'
   else
-    "Sorry, there was an error!"
+    "Sorry, there were an error!"
   end
 end
 
