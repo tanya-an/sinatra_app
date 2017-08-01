@@ -1,0 +1,7 @@
+development:
+ adapter: postgresql
+ encoding: unicode
+ database: sinatra_app
+ username: <%= ENV['PG_USER'] %>
+ password: <%= ENV['PG_PASS'] %>
+ host: <%= ENV['PG_ HOST'] %>
